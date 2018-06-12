@@ -84,7 +84,7 @@ rl
 			rl.prompt();
 			break;
 	}
-	rl.prompt();
+	/** rl.prompt(); */
 })
 .on('close', () => {
 	log('Adios!');
