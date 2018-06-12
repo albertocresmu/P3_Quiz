@@ -34,7 +34,7 @@ exports.helpCmd = rl => {
 exports.listCmd = rl => {
 	models.quiz.findAll()
 	.each(quiz => {
-		log(`  [${colorize(quiz.id, 'magenta')}]: ${quiz.question}`);
+		log(`  [${colorize(quiz.id, 'magenta')}]: ${quiz.question} `);
 	})
 	.catch(error => {
 		errorlog(error.message);
@@ -131,7 +131,10 @@ exports.addCmd = rl => {
 			return {question: q, answer: a};
 		});
 	})
-	then((quiz) => {
+	.then (quiz => {
+		return models.quiz.create(quiz);
+	})
+	.then(quiz => {
 		log(` ${colorize('Se ha añadido', 'magenta')}: ${quiz.question} ${colorize('=>', 'magenta')} ${quiz.answer}`);
 	})
 	.catch(Sequelize.ValidationError, error => {
